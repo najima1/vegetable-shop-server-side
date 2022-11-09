@@ -70,18 +70,18 @@ const getSingleProduct = async (req, res) => {
 // make user review 
 const makeUserReview = async (req, res) => {
     try {
-        const { name, email, msg, image, id } = req.body
+        const { name, email, msg, img_url, productID } = req.body
         console.log(name, email, id);
 
 
-        if (!name && !email && !msg && !image && !id) {
+        if (!name && !email && !msg && !img_url && !productID) {
             return res.send({
                 status: false,
                 message: "review value not found"
             })
         }
 
-        const validReview = { name, email, msg, image, id }
+        const validReview = { name, email, msg, img_url, productID }
         const result = await user_review.insertOne(validReview)
 
         if (validReview) {
