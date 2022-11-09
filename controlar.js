@@ -71,7 +71,7 @@ const getSingleProduct = async (req, res) => {
 const makeUserReview = async (req, res) => {
     try {
         const { name, email, msg, image, productID } = req.body
-        console.log(name, email, productID);
+        console.log(productID);
 
 
         if (!name && !email && !msg && !image && !productID) {
@@ -83,6 +83,7 @@ const makeUserReview = async (req, res) => {
 
         const validReview = { name, email, msg, image, productID }
         const result = await user_review.insertOne(validReview)
+
 
         if (validReview) {
             res.send({
@@ -101,9 +102,33 @@ const makeUserReview = async (req, res) => {
     }
 }
 
+// get all the reviews
+const getAllTheReviews = async (req, res) => {
+    try {
+        const query = {}
+        const cursor = await user_review.find(query).toArray()
+
+
+        if (cursor) {
+            return res.send({
+                status: true,
+                message: "Review Product found",
+                data: cursor
+            })
+        }
+
+    } catch (error) {
+        return res.send({
+            status: false,
+            message: error.message
+        })
+    }
+}
+
 
 module.exports = {
     getAllProducts,
     getSingleProduct,
-    makeUserReview
+    makeUserReview,
+    getAllTheReviews
 }
