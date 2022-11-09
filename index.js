@@ -2,7 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const app = express()
 const cors = require('cors')
-const { getAllProducts } = require('./controlar')
+const { getAllProducts, getSingleProduct, makeUserReview } = require('./controlar')
 const port = process.env.PORT || 8000
 
 app.use(cors())
@@ -13,6 +13,12 @@ const run = async () => {
     try {
         // 1) get all the products
         app.get('/products', getAllProducts)
+
+        //get single products
+        app.get('/product/:id', getSingleProduct)
+
+        // create user review
+        app.post('/product/review',makeUserReview)
 
     } catch (error) {
         console.log(error.message);
