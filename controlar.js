@@ -162,6 +162,7 @@ const createProduct = async (req, res) => {
         }
 
         const result = await userCollection.insertOne({ name, price, img, details: { product_id } })
+        console.log(result);
 
         if (result) {
             return res.send({

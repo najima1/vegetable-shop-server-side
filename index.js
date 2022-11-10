@@ -27,7 +27,7 @@ const run = async () => {
         app.post('/product/review', makeUserReview)
 
         //create single product
-        app.post('/product/create', createProduct)
+        app.post('/products', createProduct)
 
 
     } catch (error) {
