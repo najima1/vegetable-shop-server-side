@@ -127,26 +127,27 @@ const getAllTheReviews = async (req, res) => {
 
 
 // delete review
-// const deleteReview = async (req, res) => {
-//     try {
-//         const id = req.params.id
-//         console.log(id);
-//         const query = { _id: ObjectId(id) }
-//         const cursor = await user_review.deleteOne(query)
+const deleteReview = async (req, res) => {
+    try {
+        const id = req.params.id
+        console.log(id);
+        const query = { _id: ObjectId(id) }
+        const cursor = await user_review.deleteOne(query)
 
-//         res.send({
-//             status: true,
-//             message: "Review Product deleted success",
-//             data: cursor
-//         })
 
-//     } catch (error) {
-//         return res.send({
-//             status: false,
-//             message: error.message
-//         })
-//     }
-// }
+        res.send({
+            status: true,
+            message: "Review Product deleted success",
+            data: cursor
+        })
+
+    } catch (error) {
+        return res.send({
+            status: false,
+            message: error.message
+        })
+    }
+}
 
 
 module.exports = {
@@ -154,5 +155,5 @@ module.exports = {
     getSingleProduct,
     makeUserReview,
     getAllTheReviews,
-    // deleteReview
+    deleteReview
 }

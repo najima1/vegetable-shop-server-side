@@ -21,7 +21,7 @@ const run = async () => {
         app.get('/review', getAllTheReviews)
 
         // delete single review
-        // app.delete('/review/deleted', deleteReview)
+        app.delete('/product/deleted/:id', deleteReview)
 
         // create user review
         app.post('/product/review', makeUserReview)
