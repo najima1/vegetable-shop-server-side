@@ -149,11 +149,41 @@ const deleteReview = async (req, res) => {
     }
 }
 
+//create single product
+const createProduct = async (req, res) => {
+    try {
+        const { name, price, img, details: { product_id } } = req.body
+
+        if (!name && !price && !img && !product_id) {
+            return res.send({
+                status: false,
+                message: 'Not a valid product field'
+            })
+        }
+
+        const result = await userCollection.insertOne({ name, price, img, details: { product_id } })
+
+        if (result) {
+            return res.send({
+                status: true,
+                message: 'Inserted product found',
+                data: result
+            })
+        }
+
+    } catch (error) {
+        return res.send({
+            status: false,
+            message: error.message
+        })
+    }
+}
 
 module.exports = {
     getAllProducts,
     getSingleProduct,
     makeUserReview,
     getAllTheReviews,
-    deleteReview
+    deleteReview,
+    createProduct
 }
