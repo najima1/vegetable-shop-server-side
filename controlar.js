@@ -151,27 +151,19 @@ const deleteReview = async (req, res) => {
 //create single product
 const createProduct = async (req, res) => {
     try {
-        const { name, price, img, details: { product_id } } = req.body
-        console.log(req.body);
+        const query = req.body
 
-        if (!name && !price && !img && !product_id) {
+        if (!query) {
             return res.send({
                 status: false,
-                message: 'Not a valid product field'
+                message: "Not a valid product"
             })
         }
-
-        const createPro = {
-            name, price, img, details: { product_id }
-        }
-
-        const result = await userCollection.insertOne(createPro)
-        console.log(result);
-
+        const result = await userCollection.insertOne(query)
         if (result) {
             return res.send({
                 status: true,
-                message: 'Inserted product found',
+                message: "Product created successfull",
                 data: result
             })
         }
