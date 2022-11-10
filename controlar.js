@@ -176,11 +176,51 @@ const createProduct = async (req, res) => {
     }
 }
 
+//review update
+const update_review = async (req, res) => {
+    try {
+        const id = req.params.id
+        const filter = { _id: ObjectId(id) }
+        const options = { upsert: true };
+        // create a document that sets the plot of the movie
+        const updateDoc = {
+            $set: {
+                plot: `A harvest of random numbers, such as: ${ Math.random() }`
+            },
+        };
+
+    } catch (error) {
+        return res.send({
+            status: false,
+            message: error.message
+        })
+    }
+}
+
+//get signle review
+const getSingleReview = async (req, res) => {
+    try {
+        const id = req.params.id
+        const query = { _id: ObjectId(id) }
+
+        const result = await user_review.findOne(query)
+        res.send(result)
+
+    } catch (error) {
+        return res.send({
+            status: false,
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     getAllProducts,
     getSingleProduct,
     makeUserReview,
     getAllTheReviews,
     deleteReview,
-    createProduct
+    createProduct,
+    update_review,
+    getSingleReview
 }
