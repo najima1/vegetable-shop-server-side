@@ -71,7 +71,6 @@ const getSingleProduct = async (req, res) => {
 const makeUserReview = async (req, res) => {
     try {
         const { name, email, msg, image, productID } = req.body
-        console.log(productID);
 
 
         if (!name && !email && !msg && !image && !productID) {
@@ -153,6 +152,7 @@ const deleteReview = async (req, res) => {
 const createProduct = async (req, res) => {
     try {
         const { name, price, img, details: { product_id } } = req.body
+        console.log(req.body);
 
         if (!name && !price && !img && !product_id) {
             return res.send({
@@ -160,9 +160,12 @@ const createProduct = async (req, res) => {
                 message: 'Not a valid product field'
             })
         }
-        console.log(name, price, img,);
-        
-        const result = await userCollection.insertOne({ name, price, img, details: { product_id } })
+
+        const createPro = {
+            name, price, img, details: { product_id }
+        }
+
+        const result = await userCollection.insertOne(createPro)
         console.log(result);
 
         if (result) {
