@@ -160,7 +160,8 @@ const createProduct = async (req, res) => {
                 message: 'Not a valid product field'
             })
         }
-
+        console.log(name, price, img,);
+        
         const result = await userCollection.insertOne({ name, price, img, details: { product_id } })
         console.log(result);
 
