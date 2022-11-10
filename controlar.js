@@ -180,14 +180,20 @@ const createProduct = async (req, res) => {
 const update_review = async (req, res) => {
     try {
         const id = req.params.id
+        const updateReview = req.body
         const filter = { _id: ObjectId(id) }
         const options = { upsert: true };
         // create a document that sets the plot of the movie
         const updateDoc = {
             $set: {
-                plot: `A harvest of random numbers, such as: ${ Math.random() }`
+                name: updateReview.r_name,
+                image: updateReview.r_image,
+                msg: updateReview.r_message
             },
         };
+
+        const result = await user_review.updateOne(filter, updateDoc, options)
+        res.send(result)
 
     } catch (error) {
         return res.send({
